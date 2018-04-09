@@ -1,0 +1,36 @@
+<div>
+  <h2>Add New Game</h2>
+</div>
+<div class="form">
+    <form (submit)="createGame()" #gameForm="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" id="inputEmail4" required minlength="2" [(ngModel)]="game.name" #name="ngModel" placeholder="Tell us the name of your game">
+          </div>
+        <div class="form-group">
+          <label for="console">Console</label>
+          <input type="text" name="console" class="form-control" id="inputEmail4" required minlength="3" [(ngModel)]="game.console" #console="ngModel" placeholder="What gaming console does your game belong to?">
+        </div>
+        <div class="form-group">
+            <label for="condition">Condition</label>
+            <input type="text" name="condition" class="form-control" id="inputEmail4" required minlength="5" maxlength="50" [(ngModel)]="game.condition" #condition="ngModel" placeholder="What condition is your game in? i.e. 'Plays Great!' or 'Has issues...'">
+          </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="price">Price</label>
+            <input type="number" name="price" class="form-control" id="inputCity" required min="0.01" [(ngModel)]="game.price" #price="ngModel">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="year">Year Bought</label>
+            <select name="year" id="inputState" class="form-control" [(ngModel)]="game.year" #year="ngModel">
+              <option selected>2018</option>
+              <option *ngFor="let i of years">{{i}}</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="gameForm.invalid">Add Game</button>
+      </form>
+
+      <span *ngIf="error.err">{{error.msg}}</span>
+
+</div>

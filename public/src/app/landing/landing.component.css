@@ -1,0 +1,10 @@
+.forms{
+    display: inline-block;
+    border: 5px solid blue;
+    border-radius: 20px;
+    padding: 9px;
+    margin-left: 200px;
+    background-color: rgb(0, 0, 0);
+    opacity: .6;
+    filter: alpha(opacity=60);
+}

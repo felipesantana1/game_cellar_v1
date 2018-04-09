@@ -1,0 +1,11 @@
+.games{
+    display: inline-block;
+    margin-left: 200px;
+}
+
+.wrapper{
+    background: linear-gradient(-90deg, black, #740d0d); 
+}
+#header{
+    color: whitesmoke;
+}

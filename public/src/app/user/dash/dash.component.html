@@ -1,0 +1,26 @@
+<div class="wrapper">
+    <div id="header">
+        <h2>{{user}} is Logged In!</h2>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    
+    <div class="games">
+        <span  *ngFor="let game of games">
+            <div *ngIf="games" class="jumbotron">
+                <h1 class="display-4">{{game.name}}</h1>
+                <h4 class="display-4">{{game.console}}</h4>
+                <p class="lead">{{game.condition}}.</p>
+                <hr class="my-4">
+                <p>${{game.price}}</p>
+                <p class="lead">
+                <button class="btn btn-primary btn-lg" role="button">Contact Seller</button>
+                </p>
+            </div>
+        </span>
+    </div>
+
+    <span *ngIf="error.err">{{error.msg}}</span>
+</div>
