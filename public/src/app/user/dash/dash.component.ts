@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../game.service';
 import { Router } from '@angular/router';
+import { User } from '../../user';
 
 @Component({
   selector: 'app-dash',
@@ -9,13 +10,17 @@ import { Router } from '@angular/router';
 })
 export class DashComponent implements OnInit {
 
-  user;
-  token;
-  games;
+  user: object;
+  token: string;
+  games: Array<object>;
+  seller: object;
   error = {
     err: false,
     msg:"Sorry no Games Avaialble, Go ahead and add ine! :)"
   }
+  contact: boolean = false;
+
+  wishList = new User();
 
   constructor(private _service: GameService, private _router: Router) { }
 
@@ -41,4 +46,25 @@ export class DashComponent implements OnInit {
     });
   };
 
+  contactSeller(id){
+    this._service.getSeller(id, res => {
+      if(res.user){
+        this.contact = true;
+        this.seller = res.user;
+      } else {
+        console.log("Oops, something went wrong! :(");
+      }
+   });
+  };
+
+  addToWishList(data){
+    this.wishList.wishlist.push(data);
+    this._service.editUser(this.wishList, res => {
+      if(res.user){
+        document.write("Success!");
+      } else {
+        document.write("Failed!");
+      }
+    })
+  }
 }

@@ -23,7 +23,8 @@ module.exports = {
     },
 
     one_user: function(req, res){
-        var token = req.params.token
+        var token = req.params.token;
+        var id = req.params.id;
         if(token){
             jwt.verify(token, secret, function(err, decoded){
                 if(err){
@@ -39,7 +40,16 @@ module.exports = {
                     });
                 };
             });
-        };
+        }else if(id){
+            User.findById(id).populate("games").exec(function(err, user){
+                if(err || !user){
+                    res.json({user:false});
+                } else {
+                    user.password = null;
+                    res.json({user:user});
+                }
+            });
+        }
     },
 
     logInUser: function(req, res){
@@ -50,7 +60,7 @@ module.exports = {
                 // send user id as false to instantiate error message on front end
                 console.log(err);
                 res.json({id:false});
-            } else {
+            } else {        
                 // comapre the password entered with the previously hashed password savedin db
                 bcrypt.compare(req.body.password, user.password, function(err, match){
                     if(err){
@@ -59,15 +69,16 @@ module.exports = {
                         console.log(err);
                         res.json({id:false});
                     // check if match returns as true or false
-                    } else if(match){
+                    } else if(match){       
                         // if true will initiate session id
                         // send id as user id to log in user and allow access to app
                         var token = jwt.sign({id:user._id}, secret, { expiresIn: '24h'});
-                        res.json({token: token});
+                        res.json({token: token}); 
                     }
                 });
             };
         });
+        
     },
 
     updateUser: function(req, res){
@@ -77,11 +88,16 @@ module.exports = {
                     console.log(err);
                     res.json({user:false});
                 } else {
-                    User.findByIdAndUpdate(decoded.id, req.body, function(err, user){
+                    User.findById(decoded.id, function(err, user){
                         if(err || !user){
                             console.log(err);
                             res.json({user:false});
                         } else {
+                            user.bio = req.body.bio;
+                            user.phone = req.body.phone
+                            user.system = req.body.system
+                            user.wishList = req.body.wishList;
+                            user.save();
                             res.json({user:user});
                         }
                     });

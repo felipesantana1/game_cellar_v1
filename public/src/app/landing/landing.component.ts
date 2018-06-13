@@ -30,7 +30,6 @@ export class LandingComponent implements OnInit {
   regUser(){
     this._service.register(this.userReg, res => {
       if(res.token){
-        console.log("Made it!")
         this._service.token = res.token;
         window.localStorage.setItem("token", res.token);
         this._router.navigateByUrl("/gamer/dash");

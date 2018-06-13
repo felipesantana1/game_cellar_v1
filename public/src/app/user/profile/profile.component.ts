@@ -14,7 +14,10 @@ declare var $:any;
 export class ProfileComponent implements OnInit {
 
   user;
-  editUser = new User();
+  bio;
+  phone;
+  system;
+  profile = new User();
   edit = false;
   pictureUpload: FileList;
   profilePicture;
@@ -36,7 +39,8 @@ export class ProfileComponent implements OnInit {
     this._service.getUser(this.token, res => {
       if(res.user){
         this._service.userID = res.user._id
-        this.user = res.user.username;
+        this.user = res.user
+        console.log(res.user);
       } else {
         this._router.navigateByUrl("/");
       };
@@ -63,4 +67,13 @@ export class ProfileComponent implements OnInit {
     });
   };
 
+  editUser(){
+    this._service.editUser(this.profile, res => {
+      if(res.user){
+        this._router.navigateByUrl("/gamer/profile");
+      } else {
+        console.log("Something went wrong :(");
+      }
+    })
+  }
 };

@@ -8,19 +8,26 @@
     <br>
     
     <div class="games">
-        <span  *ngFor="let game of games">
+        <span  *ngFor="let game of games" class="gameBox">
             <div *ngIf="games" class="jumbotron">
                 <h1 class="display-4">{{game.name}}</h1>
                 <h4 class="display-4">{{game.console}}</h4>
                 <p class="lead">{{game.condition}}.</p>
                 <hr class="my-4">
                 <p>${{game.price}}</p>
-                <p class="lead">
-                <button class="btn btn-primary btn-lg" role="button">Contact Seller</button>
+                <p>
+                <button class="lead" class="btn btn-primary btn-lg" role="button" (click)="contactSeller(game._user)">Contact Seller</button>
+                <button class="lead" class="btn btn-secondary btn-lg" role="button" (click)="addToWishList({id:game._id, name:game.name})">Add to Wish List</button>
                 </p>
             </div>
         </span>
     </div>
 
     <span *ngIf="error.err">{{error.msg}}</span>
+
+    <div *ngIf="contact" class="contactSeller">
+        <h3>{{seller.username}}</h3>
+        <p>{{seller.email}}</p>
+        <button (click)="contact=false;">Exit</button>
+    </div>
 </div>

@@ -1,7 +1,7 @@
-<div class="card bg-dark text-white">
-  <img class="img-fluid" src="../assets/video-game-characters-wallpaper-high-resolution-Is-Cool-Wallpapers.jpg" alt="Card image">
-  <div class="card-img-overlay">
-    <div class="forms" id="loginForm">
+<div class="landing">
+  <!-- <img class="img-fluid" src="../assets/video-game-characters-wallpaper-high-resolution-Is-Cool-Wallpapers.jpg" alt="Card image"> -->
+  <!-- <div class="card-img-overlay"> -->
+    <div class="forms">
       <h4>Log In!</h4>
       <form (submit)="logUser()" #logForm="ngForm" class="form-group">
       <label for="username">Username:</label>
@@ -31,7 +31,7 @@
       </form>
       <span *ngIf="err.regError">{{err.msg}}</span>
     </div>
-  </div>
+  <!-- </div> -->
 </div>
 <div style="background-color:darkgray" class="card text-center">
   <div class="card-body">

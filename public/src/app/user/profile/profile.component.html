@@ -1,5 +1,5 @@
 <div>
-    <h2 class="header">{{user}}'s Profile Page</h2> | <button class="header" id="editButton" class="btn btn-light btn-large">Edit Profile</button>
+    <h2 class="header">{{user.username}}'s Profile Page</h2> | <button class="header" id="editButton" class="btn btn-light btn-large">Edit Profile</button>
 </div>
 <br>
 <br>
@@ -10,16 +10,16 @@
   <form (submit)="editUser()" #editForm="ngForm">
       <div class="form-group">
         <label for="bio">Bio:</label>
-        <textarea name="bio" class="form-control" id="inputAddress" required [(ngModel)]="editUser.bio" placeholder="Tell us about yourself?" #bio="ngModel"></textarea>
+        <textarea name="bio" class="form-control" id="inputAddress" required [(ngModel)]="profile.bio" placeholder="Tell us about yourself?" #bio="ngModel"></textarea>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="phone">Phone Nunber:</label>
-          <input type="text" name="phone" class="form-control" id="inputCity" required [(ngModel)]="editUser.phone" placeholder="(###)###-####" #phone="ngModel">
+          <input type="text" name="phone" class="form-control" id="inputCity" required [(ngModel)]="profile.phone" placeholder="(###)###-####" #phone="ngModel">
         </div>
         <div class="form-group col-md-6">
           <label for="system">System:</label>
-          <input type="text" name="system" class="form-control" required [(ngModel)]="editUser.system" placeholder="Tell us your favorite gaming system?" #system="ngModel">
+          <input type="text" name="system" class="form-control" required [(ngModel)]="profile.system" placeholder="Tell us your favorite gaming system?" #system="ngModel">
         </div>
       </div>
       <input type="submit" class="btn btn-primary" value="Edit" [disabled]="editForm.invalid">
@@ -29,16 +29,21 @@
 <div class="card" style="width: 20rem; margin-left: 30rem;">
   <img class="card-img-top" src="../../../assets/fake-facebook-profile-picture-funny-batman-pic.jpg" alt="profile picture">
   <div class="card-body">
-    <h3 class="card-title" style="text-align:center;">{{user}}</h3>
+    <h3 class="card-title" style="text-align:center;">{{user.username}}</h3>
     <p class="card-text"></p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"></li>
-    <li class="list-group-item"></li>
-    <li class="list-group-item"></li>
+    <li class="list-group-item"><b>{{user.bio}}</b></li>
+    <li class="list-group-item">{{user.phone}}</li>
+    <li class="list-group-item">{{user.system}}</li>
   </ul>
   <div class="card-body">
     <a href="#" class="card-link"></a>
     <a href="#" class="card-link"></a>
   </div>
+  <!-- <div>
+    <ul>
+      <li *ngFor="let game of user.wishList">{{game.name}}</li>
+    </ul>
+  </div> -->
 </div>

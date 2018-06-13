@@ -1,11 +1,16 @@
-.games{
+/* .games{
     display: inline-block;
+    height: 200px;
     margin-left: 200px;
 }
-
 .wrapper{
-    background: linear-gradient(-90deg, black, #740d0d); 
+    background: linear-gradient(-90deg, black, #740d0d);
+    background-size: cover;
+    height: fit-content;
 }
 #header{
     color: whitesmoke;
 }
+.lead{
+    display: inline;
+} */

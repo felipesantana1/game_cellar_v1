@@ -46,6 +46,18 @@ export class GameService {
     );
   };
 
+  getSeller(id, cb){
+    this._http.get("/seller/"+id).subscribe(
+      res => {
+        cb(res.json());
+      },
+      err =>{
+        console.log(err.json());
+        cb(err.json());
+      }
+    );
+  }
+
   lougOutUser(){
     this.token = null;
     window.localStorage.removeItem("token");
@@ -91,5 +103,17 @@ export class GameService {
   getToken(){
     return window.localStorage.getItem("token");
   }
+
+  editUser(data, cb){
+    this._http.put("/user/"+this.token, data).subscribe(
+      res => {
+        cb(res.json());
+      },
+      err => {
+        console.log(err.json());
+        cb(err.json());
+      }
+    );
+  };
 
 };

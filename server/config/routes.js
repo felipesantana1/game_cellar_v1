@@ -5,6 +5,10 @@ module.exports = function(app){
 
     app.get("/user/:token", function(req, res){
         controller.one_user(req, res);
+    });
+
+    app.get("/seller/:id", function(req, res){
+        controller.one_user(req, res);
     })
 
     app.get("/game", function(req, res){

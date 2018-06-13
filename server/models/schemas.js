@@ -14,12 +14,13 @@ const UserSchema = mongoose.Schema({
     games:[{type:Schema.Types.ObjectId, ref:"Game"}],
     bio:{type:String, required:false},
     system:{type:String, required:false},
+    wishList:{type:Array, required:false}
 }, {timestamps:true});
 
-// pre method has access to user pior to given key; i.e. "save"
+// pre method has access to user prior to given key; i.e. "save"
 UserSchema.pre('save', function(next){
-    // give variable user access to 'this', which obtains user info
-    // otherwise scope of user wil be lost within the hashPassword method
+    // give var "user" access to 'this', which obtains user info
+    // otherwise scope of var "user" wil be lost within the hashPassword method
     var user = this;
     this.hashPassword(user.password, function(err, hash){
         if(err){
