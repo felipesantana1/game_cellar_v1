@@ -16,7 +16,7 @@ export class DashComponent implements OnInit {
   seller: object;
   error = {
     err: false,
-    msg:"Sorry no Games Avaialble, Go ahead and add ine! :)"
+    msg:"Sorry no Games Avaialble, Go ahead and add one! :)"
   }
   contact: boolean = false;
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-landing',
@@ -18,6 +19,9 @@ export class LandingComponent implements OnInit {
     regError: false,
     msg:"Oops, Something went wrong! Please try again :)",
   }
+  games;
+  signIn=false;
+  reg=true;
   
   constructor(private _service: GameService,private _router: Router) { }
 
@@ -25,6 +29,14 @@ export class LandingComponent implements OnInit {
     if(this._service.getToken()){
       this._router.navigateByUrl("/gamer/dash");
     }
+    this._service.getGames(res => {
+      if(res.games){
+        this.games = res.games[1];
+        console.log(this.games);
+      } else {
+        console.log("fuck!")
+      }
+    })
   }
 
   regUser(){
@@ -52,4 +64,12 @@ export class LandingComponent implements OnInit {
       }
     });
   };
+  register(){
+    this.reg=true;
+    this.signIn=false
+  }
+  sign(){
+    this.reg=false;
+    this.signIn=true
+  }
 }
