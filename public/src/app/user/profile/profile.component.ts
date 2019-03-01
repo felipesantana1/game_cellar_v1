@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
   };
 
   logOut(){
-    this._service.lougOutUser();
+    this._service.logOutUser();
   };
 
   uploadPicture(){

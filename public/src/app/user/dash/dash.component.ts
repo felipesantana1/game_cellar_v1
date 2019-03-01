@@ -10,7 +10,7 @@ import { User } from '../../user';
 })
 export class DashComponent implements OnInit {
 
-  user: object;
+  user;
   token: string;
   games: Array<object>;
   seller: object;
@@ -18,15 +18,15 @@ export class DashComponent implements OnInit {
     err: false,
     msg:"Sorry no Games Avaialble, Go ahead and add one! :)"
   }
-  contact: boolean = false;
+  contact = null;
 
-  wishList = new User();
+  userWishList = new User();
 
   constructor(private _service: GameService, private _router: Router) { }
 
   ngOnInit() {
     if(!this._service.token){
-      this._router.navigateByUrl("/")
+      this._router.navigateByUrl("/");
     }
     this.token = this._service.token
     this._service.getUser(this.token, res => {
@@ -58,8 +58,8 @@ export class DashComponent implements OnInit {
   };
 
   addToWishList(data){
-    this.wishList.wishlist.push(data);
-    this._service.editUser(this.wishList, res => {
+    this.userWishList.wishlist.push(data);
+    this._service.editUser(this.userWishList, res => {
       if(res.user){
         document.write("Success!");
       } else {

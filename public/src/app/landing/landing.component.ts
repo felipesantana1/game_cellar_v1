@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
-import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-landing',
@@ -34,7 +33,7 @@ export class LandingComponent implements OnInit {
         this.games = res.games[1];
         console.log(this.games);
       } else {
-        console.log("fuck!")
+        console.log("No games available")
       }
     })
   }

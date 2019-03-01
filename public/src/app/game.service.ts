@@ -58,7 +58,7 @@ export class GameService {
     );
   }
 
-  lougOutUser(){
+  logOutUser(){
     this.token = null;
     window.localStorage.removeItem("token");
     this._router.navigateByUrl("/");

@@ -52,7 +52,7 @@ export class NewComponent implements OnInit {
   }
 
   logOut(){
-    this._service.lougOutUser();
+    this._service.logOutUser();
   };
 
   getYears(){

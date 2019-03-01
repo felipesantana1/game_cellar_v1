@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="forms">
-    <form style="height: 60%" (submit)="logUser()" #logForm="ngForm" *ngIf="this.signIn==true">
+    <form style="height: 70%" (submit)="logUser()" #logForm="ngForm" *ngIf="this.signIn==true">
       <h1>Sign In!</h1>
       <ul>
         <li>
@@ -24,7 +24,7 @@
           <input type="submit" value="Log In" [disabled]="logForm.invalid">
         </li>
       </ul>
-      <span *ngIf="err.logError">{{err.msg}}</span>
+      <span style="text-align: center;" *ngIf="err.logError">{{err.msg}}</span>
     </form>
 
     <form style="height: 100%" (submit)="regUser()" #regForm="ngForm" *ngIf="this.reg==true">
@@ -52,7 +52,7 @@
           <input type="submit" value="Register" [disabled]="regForm.invalid||userReg.password!=confirm_password">
         </li> 
       </ul>
-      <span *ngIf="err.regError">{{err.msg}}</span>
+      <span style="text-align: center;" *ngIf="err.regError">{{err.msg}}</span>
     </form>
   </div> 
 </section>

@@ -54,22 +54,27 @@ module.exports = {
 
     logInUser: function(req, res){
         User.findOne({username:req.body.username}, function(err, user){
+            console.log(user)
             // check for error or empty user return 
             if(err || !user){
                 // log error to cosnole for development
                 // send user id as false to instantiate error message on front end
                 console.log(err);
                 res.json({id:false});
-            } else {        
+            } else {   
+                console.log("comparing")     
                 // comapre the password entered with the previously hashed password savedin db
                 bcrypt.compare(req.body.password, user.password, function(err, match){
                     if(err){
+                        console.log("Oh no there was an error")
                         // log error to cosnole for development
                         // send user id as false to instantiate error message on front end
                         console.log(err);
                         res.json({id:false});
                     // check if match returns as true or false
-                    } else if(match){       
+                    }
+                    if(match){ 
+                        console.log("it worked")      
                         // if true will initiate session id
                         // send id as user id to log in user and allow access to app
                         var token = jwt.sign({id:user._id}, secret, { expiresIn: '24h'});
