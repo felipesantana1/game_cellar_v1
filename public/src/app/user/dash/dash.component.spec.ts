@@ -62,9 +62,11 @@ describe('DashComponent', () => {
     router = TestBed.get(Router)
   }));
 
-  it('contact should be null', () => {
-    expect(component.contact).toBeNull();
+  afterEach(() => {
+    service = null;
+    component = null;
   })
+  
   it('Should check for token and navigate to main page if not found', () => {
     el = fixture.debugElement.query(By.css('#header'));
     let spy = spyOn(router, 'navigateByUrl')
@@ -95,4 +97,10 @@ describe('DashComponent', () => {
     expect(component.token).toBe(service.token);
     expect(el.nativeElement.textContent.trim()).toBe(component.user+" is Logged In!")
   });
+  
+  it('contact should be null', () => {
+    expect(component.contact).toBeNull();
+  })
+
+  
 });

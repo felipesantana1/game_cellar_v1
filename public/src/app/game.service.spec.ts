@@ -27,6 +27,7 @@ describe('GameService', () => {
   let router: Router;
   let mockUser: User;
   let mockGame: Game;
+  let errMsg;
   
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -77,7 +78,7 @@ describe('GameService', () => {
     mockGame.price = 100;
     mockGame.year = "2001";
 
-    // fixture = TestBed.createComponent(AppComponent);
+    errMsg = 'Oops something went wrong please try again';
     router.initialNavigation();
   });
   it('Should create the GameService', () => {
@@ -93,8 +94,10 @@ describe('GameService', () => {
       ));
     });
     let result: any;
-    service.register(mockUser, res => {
-      result = res
+    let error: any;
+    service.register(mockUser, (res, err) => {
+      result = res,
+      error = err
     })
     expect(result.username).toBe(mockUser.username);
     expect(result.email).toMatch('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}');
@@ -102,6 +105,22 @@ describe('GameService', () => {
     expect(result.password).toBe(mockUser.password);
     expect(result.password.length).toBeGreaterThan(8);
   });
+  
+  it('Should return an error when user credentials are incorrect', () => {
+    backend.connections.subscribe((connection: MockConnection) => {
+      connection.mockRespond(new Response(
+        new ResponseOptions({
+          body: JSON.stringify(errMsg)
+        })
+      ));
+    });
+    let error;
+    service.register(mockUser, (err) => {
+      error = err;
+    });
+    
+    expect(error).toBe(errMsg);
+  })
 
   it('Should log in User when corect credentials are given', fakeAsync(() => {
     let fakeUser = {
